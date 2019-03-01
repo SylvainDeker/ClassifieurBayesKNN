@@ -77,32 +77,32 @@ Learning,  ,k-NN classification,.
 % pr\'esentation donn\'es ici. L'objectif vis\'e est de proposer une unit\'e
 % de pr\'esentation des actes, et nous vous invitons \`a tenter de respecter
 % ce mod\`ele autant que le permet votre logiciel favori.
-% 
+%
 % Pour les auteurs utilisant \LaTeX\, le fichier source de ce
 % texte (\verb|latex.tex|) est lui-m\^eme une base pour obtenir une
 % sortie conforme avec \LaTeXe\footnote{ou \LaTeX}.
-% 
+%
 % Les autres trouveront des renseignements (peut-\^etre) plus lisibles
 % pour eux dans le fichier \verb|word.doc| (Word).
-%   
+%
 % Un fichier PDF contient \'egalement la d\'efinition compl\`ete de la
 % pagination. Il a pour nom \verb|pages.pdf| et est cliquable sur la page
 % Web.
-% 
+%
 % La base du texte est du Times-Roman 10 points pr\'esent\'e en deux colonnes.
 % La s\'eparation inter-colonne est de 1 cm.
-% 
+%
 % Le titre principal est en 14 points gras (28 points = 1cm).
-% 
+%
 % Dans les sections, le titre est en 12 points gras.
 % Les paragraphes ne sont pas decal\'es.
-% 
+%
 % Les sous-sections num\'erot\'ees comme suit~:
 % \subsection{Travaux ant\'erieurs}
 % Les en-t\^etes sont \'egalement en 12 points gras.
-% 
+%
 % Il n'y a pas n\'ecessairement d'espacement entre les paragraphes.
-% 
+%
 % Les r\'ef\'erences \`a la Bibliographie peuvent \^etre de la forme
 %  \cite{key:foo} o\`u \cite{foo:baz}.  Les num\'eros correspondent \`a
 %  l'ordre d'apparition dans la bibliographie, pas dans le texte.
@@ -114,9 +114,9 @@ A l'issue de ces tests des recherches sur l'évaluation des données par validatio
 % Pour les utilisateurs de \LaTeX,
 % ce patron est minimaliste et vous aurez besoin de votre manuel \LaTeX
 % pour ins\'erer \'equations et images.
-% 
+%
 % Pour les images le << paquet >> \verb|graphicx| est tr\`es bien.
-% 
+%
 % Les fichiers de style n\'ecessaires pour la compilation \LaTeX\ sont :
 % \begin{itemize}
 %   \item \verb|a4.sty|  (pour \LaTeX, mais pas \LaTeXe)
@@ -126,22 +126,29 @@ A l'issue de ces tests des recherches sur l'évaluation des données par validatio
 % Vous devriez avoir les deux premiers dans votre instalation de
 % \LaTeX. Le dernier contient la d\'efinition des marges et vous devrez le
 % r\'ecup\'erer.
-% 
+%
 
 \section{Classification bayésienne avec Gaussienne}
 La classification bayéssienne avec Gaussienne est une minimisation de la vraisemblance qui vise à prédire la classe d'appartenance la plus probable d'une donnée. Néanmoins avec des données réelles il est difficile d'obtenir des résultats satisfaisants car les données ne sont pas simples. Ainsi pour améliorer le modèle on tient compte de la probabilité a priori en applicant la loi de Bayes.\\
 Dans les tps précedant, nous avions déjà implémenté en python l'algorithme de prédiction permettant de classer les données fournies. Ici nous somme reparti de ce code qui était basé sur une simplification de la vraisemblance en log-vraisemblance. C'est-à-dire que la vraisemblance qui est une expression exponentielle a été simplifié par l'application du logarithme népérien afin d'obtenir un calcul un peu plus optimisé. De plus toutes les constantes ne dépendant pas des données ont été supprimé, n'apportant pas une précision indispensable dans la reconnaissance des données.
 
 \section{Classification k-NN}
+La méthode des K plus proches voisins (KNN) a pour but de classifier des points cibles (classe méconnue) en fonction de leurs distances par rapport à des points constituant un échantillon d’apprentissage (c’est-à-dire dont la classe est connue a priori).
 
 \section{Evaluation par validation croisée}
+La validation croisée est une méthode d\'estimation de la fiabilité d\'un modèle
+fondé sur la technique d'échantillonage. Les essembles de données d'apprentissages
+sont les fichiers de test data2.csv, data3.csv et data12.csv sur lequel on peut
+entrainer le modèle. Nous appelons "leanring ratio" la proportion des données
+d'un fichier dédié à l\'apprentissage, la partie restante sert d\'échantillons
+da validation. Cette méthode de test s'appelle "testset validation" ou "holdout method".
 
 \section{Résultats}
 
 \section{Conclusion}
 % \subsection*{Annexe}
 % Merci de votre participation.
-% 
+%
 % \begin{thebibliography}{9}
 % \bibitem{foo:baz}
 % U. Nexpert,
@@ -154,5 +161,3 @@ Dans les tps précedant, nous avions déjà implémenté en python l'algorithme de pr
 % \end{thebibliography}
 
 \end{document}
-
-
