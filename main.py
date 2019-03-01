@@ -37,7 +37,7 @@ def bayes(train_data, train_labels, test_data, test_labels):
     start = time.time()
 
     # Instanciation de la classe GaussianB
-    g = GaussianBayes((1,)*10)
+    g = GaussianBayes((1,)*len(np.unique(train_labels)))
 
     # Apprentissage
     g.fit(train_data, train_labels)
