@@ -64,13 +64,6 @@ Cet article vise à comparer les avantages et les désavantages des classification
 \subsection*{Mots Clef}
 Apprentissage, classification bayésienne, classification k-ppv.
 
-\subsection*{Abstract}
-{\em
-
-}
-\subsection*{Keywords}
-Learning,  ,k-NN classification,.
-
 \section{Introduction}
 % Le contenu de l'article peut \^etre r\'edig\'e avec n'importe quel formateur
 % ou traitement de texte, pourvu qu'il r\'eponde aux crit\`eres de
@@ -107,8 +100,9 @@ Learning,  ,k-NN classification,.
 %  \cite{key:foo} o\`u \cite{foo:baz}.  Les num\'eros correspondent \`a
 %  l'ordre d'apparition dans la bibliographie, pas dans le texte.
 %  L'ordre alphab\'etique est conseill\'e.
-Classification bayésienne avec gaussienne et k-ppv sont des classifications supervisée dont l'objectif est de répartir les données par classe avec un taux d'erreur minimisé. Ici pour des jeux de donnée identiques nous avons réalisés différents tests sur les deux méthodes de classification afin d'en définir les avantages et les inconvénients respectifs.\\
-A l'issue de ces tests des recherches sur l'évaluation des données par validation croisée a été mené.
+La classification bayésienne avec gaussienne et l'approche par la méthode des k-ppv sont des classifications supervisées dont l'objectif est de répartir les données par classe avec un taux d'erreur minimisé. Les tests sont menés sur un jeu de données contenant une centaine d'occurences de la prononciation d'une dizaine de voyelle aau format csv.\\
+A l'aide des travaux réalisés précédamment et en adaptant un peu le code nous avons pu implémenter le modèle de Bayes. L'implémentation pour une approche par les k-ppv, le sujet nous imposait l'utilisation de \textit{Scikitlearn}.\\
+Dans les tests menés les données fournies ont été repartie de telle sorte à avoir 80\% de données d'apprentissage et 20\% de données de tests. Dans les démarches d'apprentissage le choix d'un taux de données d'apprentissage élevé favorise l'obtention de meilleurs résultats, ici une meilleur prédiction de la répartition par classe. 
 
 % \section{Le coin \LaTeX}
 % Pour les utilisateurs de \LaTeX,
