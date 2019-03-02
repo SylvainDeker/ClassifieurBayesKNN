@@ -10,6 +10,9 @@
 \usepackage[T1]{fontenc}
 \usepackage{babel}
 \usepackage{times}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
 
 %%%% Pour \LaTeXe sans babel
 %%%% \documentclass[a4paper,twoside]{article}
@@ -65,69 +68,34 @@ Cet article vise à comparer les avantages et les désavantages des classification
 Apprentissage, classification bayésienne, classification k-ppv.
 
 \section{Introduction}
-% Le contenu de l'article peut \^etre r\'edig\'e avec n'importe quel formateur
-% ou traitement de texte, pourvu qu'il r\'eponde aux crit\`eres de
-% pr\'esentation donn\'es ici. L'objectif vis\'e est de proposer une unit\'e
-% de pr\'esentation des actes, et nous vous invitons \`a tenter de respecter
-% ce mod\`ele autant que le permet votre logiciel favori.
-%
-% Pour les auteurs utilisant \LaTeX\, le fichier source de ce
-% texte (\verb|latex.tex|) est lui-m\^eme une base pour obtenir une
-% sortie conforme avec \LaTeXe\footnote{ou \LaTeX}.
-%
-% Les autres trouveront des renseignements (peut-\^etre) plus lisibles
-% pour eux dans le fichier \verb|word.doc| (Word).
-%
-% Un fichier PDF contient \'egalement la d\'efinition compl\`ete de la
-% pagination. Il a pour nom \verb|pages.pdf| et est cliquable sur la page
-% Web.
-%
-% La base du texte est du Times-Roman 10 points pr\'esent\'e en deux colonnes.
-% La s\'eparation inter-colonne est de 1 cm.
-%
-% Le titre principal est en 14 points gras (28 points = 1cm).
-%
-% Dans les sections, le titre est en 12 points gras.
-% Les paragraphes ne sont pas decal\'es.
-%
-% Les sous-sections num\'erot\'ees comme suit~:
-% \subsection{Travaux ant\'erieurs}
-% Les en-t\^etes sont \'egalement en 12 points gras.
-%
-% Il n'y a pas n\'ecessairement d'espacement entre les paragraphes.
-%
-% Les r\'ef\'erences \`a la Bibliographie peuvent \^etre de la forme
-%  \cite{key:foo} o\`u \cite{foo:baz}.  Les num\'eros correspondent \`a
-%  l'ordre d'apparition dans la bibliographie, pas dans le texte.
-%  L'ordre alphab\'etique est conseill\'e.
+
 La classification bayésienne avec gaussienne et l'approche par la méthode des k-ppv sont des classifications supervisées dont l'objectif est de répartir les données par classe avec un taux d'erreur minimisé. Les tests sont menés sur un jeu de données contenant une centaine d'occurences de la prononciation d'une dizaine de voyelle aau format csv.\\
 A l'aide des travaux réalisés précédamment et en adaptant un peu le code nous avons pu implémenter le modèle de Bayes. L'implémentation pour une approche par les k-ppv, le sujet nous imposait l'utilisation de \textit{Scikitlearn}.\\
 Dans les tests menés les données fournies ont été repartie de telle sorte à avoir 80\% de données d'apprentissage et 20\% de données de tests. Dans les démarches d'apprentissage le choix d'un taux de données d'apprentissage élevé favorise l'obtention de meilleurs résultats, ici une meilleur prédiction de la répartition par classe. 
-
-% \section{Le coin \LaTeX}
-% Pour les utilisateurs de \LaTeX,
-% ce patron est minimaliste et vous aurez besoin de votre manuel \LaTeX
-% pour ins\'erer \'equations et images.
-%
-% Pour les images le << paquet >> \verb|graphicx| est tr\`es bien.
-%
-% Les fichiers de style n\'ecessaires pour la compilation \LaTeX\ sont :
-% \begin{itemize}
-%   \item \verb|a4.sty|  (pour \LaTeX, mais pas \LaTeXe)
-%   \item \verb|french.sty| (ou Babel fran\c{c}ais)
-%   \item \verb|rfia2000.sty|
-% \end{itemize}
-% Vous devriez avoir les deux premiers dans votre instalation de
-% \LaTeX. Le dernier contient la d\'efinition des marges et vous devrez le
-% r\'ecup\'erer.
-%
 
 \section{Classification bayésienne avec Gaussienne}
 La classification bayéssienne avec Gaussienne est une minimisation de la vraisemblance qui vise à prédire la classe d'appartenance la plus probable d'une donnée. Néanmoins avec des données réelles il est difficile d'obtenir des résultats satisfaisants car les données ne sont pas simples. Ainsi pour améliorer le modèle on tient compte de la probabilité a priori en applicant la loi de Bayes.\\
 Dans les tps précedant, nous avions déjà implémenté en python l'algorithme de prédiction permettant de classer les données fournies. Ici nous somme reparti de ce code qui était basé sur une simplification de la vraisemblance en log-vraisemblance. C'est-à-dire que la vraisemblance qui est une expression exponentielle a été simplifié par l'application du logarithme népérien afin d'obtenir un calcul un peu plus optimisé. De plus toutes les constantes ne dépendant pas des données ont été supprimé, n'apportant pas une précision indispensable dans la reconnaissance des données.
 
 \section{Classification k-NN}
-La méthode des K plus proches voisins (KNN) a pour but de classifier des points cibles (classe méconnue) en fonction de leurs distances par rapport à des points constituant un échantillon d’apprentissage (c’est-à-dire dont la classe est connue a priori).
+La méthode des K plus proches voisins (K-NN) a pour but de classifier des points cibles (classe méconnue) en fonction de leurs distances par rapport à des points constituant un échantillon d\'apprentissage (c\'est-à-dire dont la classe est connue a priori). Le calcul de la distance peut dépendre de l'expérience menée, Scikitlearn se base sur un calcul euclidien de la distance entre les données de l'échantillon, placées dans un repère après un traitement par une \textbf{A}nalyse en \textbf{C}omposantes \textbf{P}rincipales, et les centroïdes de la base d'apprentissage.
+Scikit learn est une bibliothèque libre pour python dont certaines fonctionnalités ont été utilisé pour implémenter la classification par k-NN. En effet toutes les fonctions appelé sur la variable n de la fonction k\_NN sont des fonctions appelés pour la classe KNeighborsClassifier, une classe de la bibliothèque permettant d'effectuer les traitements nécéssaire à une classification par plus proche voisin.
+
+\paragraph{}
+\begin{algorithm}
+ \caption{k\_NN}
+ \begin{algorithmic}
+  \REQUIRE  train\_data, train\_labels, test\_data, test\_labels
+  \ENSURE  m : matrice de confusion \\ p : precision 
+  \STATE  n = neighbors.KNeighborsClassifier(n\_neighbours,weights = 'distance')
+  \STATE n.fit(train\_data,train\_labels) \%apprentissage
+  \STATE y = n.predict(test\_data) 
+  mconf = matriceConf(test\_labels,y) \%calcul matrice de confusion, fonction rédigé
+  \RETURN (mconf[0], mconf[1])
+ \end{algorithmic}
+
+\end{algorithm}
+
 
 \section{Evaluation par validation croisée}
 La validation croisée est une méthode d\'estimation de la fiabilité d\'un modèle
@@ -139,19 +107,48 @@ da validation. Cette méthode de test s'appelle "testset validation" ou "holdout 
 
 \section{Résultats}
 
+\subsection{Matrice de confusion}
+Afin d'analyser et de pouvoir comparer les résultats obtenus par les deux méthodes étudiées ici, on calcule pour chaque échantillon la matrice de confusion, permettant de déduire un taux d'erreur. Cette matrice est construite à l'aide d'une classe présentes dans la bibiliothèque Scikitlearn et en appliquant les calculs nécessaire pour calculer le taux d'erreur.
+
+\subsection{Learning ratio = 0.2}
+ 
+ \paragraph{}
+ \includegraphics[width=7.5cm,scale=0.5]{images/ratio02.png}
+
+ \subsection{Learning ratio = 0.4}
+ 
+ \paragraph{}
+ \includegraphics[width=7.5cm,scale=0.5]{images/ratio04.png}
+ 
+ \subsection{Learning ratio = 0.6}
+ 
+ \paragraph{}
+ \includegraphics[width=7.5cm,scale=0.5]{images/ratio06.png}
+ 
+ \subsection{Learning ratio = 0.8}
+ 
+ \paragraph{}
+ \includegraphics[width=7.5cm,scale=0.5]{images/ratio08.png}
+
+ \subsection{Analyse temporelle}
+ \subsubsection{Bayes}
+ \paragraph{}
+ \includegraphics[width=7.5cm,scale=0.5]{images/durationBayes.png}\\
+ 
+ \subsubsection{K\_NN}
+ \paragraph{}
+ \includegraphics[width=7.5cm,scale=0.5]{images/durationKNN.png}
+
+  \subsection{Analyse précision}
+ \subsubsection{Bayes}
+ \paragraph{}
+ \includegraphics[width=7.5cm,scale=0.5]{images/precisionBayes.png}\\
+ 
+ \subsubsection{K\_NN}
+ \paragraph{}
+ \includegraphics[width=7.5cm,scale=0.5]{images/precisionKNN.png}
+
 \section{Conclusion}
-% \subsection*{Annexe}
-% Merci de votre participation.
-%
-% \begin{thebibliography}{9}
-% \bibitem{foo:baz}
-% U. Nexpert,
-% {\em Le livre,}
-% Son Editeur, 1929.
-% \bibitem{key:foo}
-% I. Troiseu-Pami,
-%  Un article int\'eressant,
-% {\em Journal de Spirou}, Vol. 17, pp. 1-100, 1987.
-% \end{thebibliography}
+
 
 \end{document}
