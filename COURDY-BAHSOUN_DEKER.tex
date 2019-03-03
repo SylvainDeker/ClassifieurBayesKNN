@@ -106,81 +106,163 @@ d'un fichier dédié à l\'apprentissage, la partie restante sert d\'échantillons
 da validation. Cette méthode de test s'appelle "testset validation" ou "holdout method".
 
 \section{Résultats}
-
+\paragraph{}
 Nous rappelons que le "leanring ratio" est la proportion des données
 d'un fichier dédié à l\'apprentissage, la partie restante servant d\'échantillons
 da validation. Pour evaluer la performance d'un algorithme, nous disposons de deux métriques,le premier étant le temps nécéssaire au processus d'apprentissage et de validation, et la second est la précision avec laquelle les résultats sont fiables.
 Une série de 50 tests ont été effectués sur les fichiers test data2.csv, data3.csv et data12.csv pour chaque learning ratio suivant : 0.2 , 0.4, 0.6 et 0.8.
 Les résultats ci-dessous présentes les moyennes sur ces 50 tests.
+\paragraph{}
+Pour reproduire les resultats observés il suffit de faire varier les paramètres dans le programme
+(cad le learning rate, nombre de test, affichage etc...). 
+Par defaut la fonction testmain est configuré pour tester 50 fois l'opération suivante: Calcul de la durée et la précision de l'algorithme KNN et Bayes pour un learning ratio fixé. En redirigeant la sortie standard vers un fichier ( ex: python3 main.py > resultat.csv) il suffit ensuite de copier/coller correctement les résultats dans le tableur resultat\_test.ods pour les résultat apparaissent. Les \figurename{ \ref{data2}}, \figurename{ \ref{data3_1}}, \figurename{ \ref{data3_2}} et \figurename{ \ref{data3_3}} ont été réalisé avec le logiciel GNUPlot avec les commandes suivantes:
+
+
 \subsection{Matrice de confusion}
 Afin d'analyser et de pouvoir comparer les résultats obtenus par les deux méthodes étudiées ici, on calcule pour chaque échantillon la matrice de confusion, permettant de déduire un taux d'erreur. Cette matrice est construite à l'aide d'une classe présentes dans la bibiliothèque Scikitlearn et en appliquant les calculs nécessaire pour calculer le taux d'erreur.
+
+ 
 \subsection{Jeu de test}
-\subsubsection{jeux de test data2.csv}
-\paragraph{}
- \includegraphics[width=7.5cm,scale=0.5]{images/data2.png}
  \paragraph{}
- \subsubsection{jeux de test data3.csv}
- \includegraphics[width=7.5cm,scale=0.5]{images/data3_1.png}
-  \paragraph{}
- \includegraphics[width=7.5cm,scale=0.5]{images/data3_2.png}
-  \paragraph{}
- \includegraphics[width=7.5cm,scale=0.5]{images/data3_3.png}
- \subsubsection{jeux de test data12.csv}
+ Les jeux de test fournit montrent des classe distinct les uns des autre pour les fichiers data2.csv  (voir \figurename{ \ref{data2}}) et pour le fichier data3.csv (voir \figurename{ \ref{data3_1}}, \figurename{ \ref{data3_2}} , \figurename{ \ref{data3_3}})
+\paragraph{}
+
+    \begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/data2.png}
+    \caption{Jeu de test data2.csv}
+    \label{data2}
+    \end{figure}
+
+
+    \begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/data3_1.png}
+    \caption{Jeu de test data3.csv vue 1}
+    \label{data3_1}
+    \end{figure}
+
+    
+    \begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/data3_2.png}
+    \caption{Jeu de test data3.csv vue 2}
+    \label{data3_2}
+    \end{figure}
+    
+    
+    \begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/data3_3.png}
+    \caption{Jeu de test data3.csv vue 3}
+    \label{data3_3}
+    \end{figure}
+
+
  
 \subsection{Observations}
+
+\paragraph{}
+La \figurename{ \ref{durationBayes}} nous montre que plus la proportion des données liés à l'apprentissage est basse ( cad plus la proportion lié à la validation est haute) plus la temps d'execution global de l'algorithme est long (cad temps d'apprentissage + temps de validation). La restitution des données pour la validation demande plus de temps de calcul que pour l'apprentissage. Cette difference de durée est observé aussi avec la méthode KNN (VOIR \figurename{ \ref{durationKNN}}) mais en beacoups moins marqué. Le pic correspondant à un learning ratio de 0.8 sur le jeu de test data12.csv de la \figurename{ \ref{durationKNN}} reste inexpliqué.
+
+\paragraph{}
+ 
+     \begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/durationBayes.png}
+    \caption{Mesure du temps de l'algorithme Bayes sur les différents jeux de test pour chaque learning rate observé}
+    \label{durationBayes}
+    \end{figure}
+
+ \paragraph{}
+     \begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/durationKNN.png}
+    \caption{Mesure du temps de l'algorithme KNN sur les différents jeux de test pour chaque learning rate observé}
+    \label{durationKNN}
+    \end{figure}
+
+\paragraph{}
+Les \figurename{ \ref{precisionBayes}} et \figurename{ \ref{precisionKNN}} montre que sur ces jeux de test les méthode KNN et Bayes sont équivalentes, en effet la différence de précision entre ces deux méthode ne sont pas significative. Des données chiffrés sont disponible dans les \figurename{ \ref{ratio02}}, \figurename{ \ref{ratio04}}, \figurename{ \ref{ratio06}} et \figurename{ \ref{ratio08}}. 
+
+ \paragraph{}
+     \begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/precisionBayes.png}
+    \caption{Mesure du la précision de l'algorithme Bayes sur les différents jeux de test pour chaque learning rate observé}
+    \label{precisionBayes}
+    \end{figure}
+
+
+ \paragraph{}
+     \begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/precisionKNN.png}
+    \caption{Mesure du la précision de l'algorithme KNN sur les différents jeux de test pour chaque learning rate observé}
+    \label{precisionKNN}
+    \end{figure}
+
 \subsubsection{Learning ratio = 0.2}
- 20 % des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
+\paragraph{}
+ 20 \% des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
  Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans le mêmes conditions.
  Dans ce context nous observons que l'algorithme KNN est environ 40 fois plus rapide de celui de Bayes.
- La précision reste stable, KNN est très légerement moins précis que Bayes pour les deux premiers jeux de test.
- \paragraph{}
- \includegraphics[width=7.5cm,scale=0.5]{images/ratio02.png}
+ La précision reste stable, KNN est très légerement moins précis que Bayes pour les deux premiers jeux de test (voir \figurename{ \ref{ratio02}}).
+
+
+    \begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/ratio02.png}
+    \caption{Resultat pour 20\% des données dédiées à l'apprentissage}
+    \label{ratio02}
+    \end{figure}
 
  \subsubsection{Learning ratio = 0.4}
- 40 % des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
+\paragraph{}
+ 40 \% des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
  Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans le mêmes conditions.
  Dans ce context nous observons que l'algorithme KNN est environ 60 fois plus rapide de celui de Bayes.
- La précision reste stable, KNN est très légerement plus précis que Bayes pour les deux derniers jeux de test.
+ La précision reste stable, KNN est très légerement plus précis que Bayes pour les deux derniers jeux de test (voir \figurename{ \ref{ratio04}}).
 
- \paragraph{}
- \includegraphics[width=7.5cm,scale=0.5]{images/ratio04.png}
+
+    \begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/ratio04.png}
+    \caption{Resultat pour 40\% des données dédiées à l'apprentissage}
+    \label{ratio04}
+    \end{figure}
 
  \subsubsection{Learning ratio = 0.6}
- 60 % des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
+\paragraph{}
+ 60 \% des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
  Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans le mêmes conditions.
  Dans ce context nous observons que l'algorithme KNN est environ 80 fois plus rapide de celui de Bayes.
- La précision reste stable, KNN est très légerement plus précis que Bayes pour les deux derniers jeux de test.
+ La précision reste stable, KNN est très légerement plus précis que Bayes pour les deux derniers jeux de test (voir \figurename{ \ref{ratio06}}).
 
 
- \paragraph{}
- \includegraphics[width=7.5cm,scale=0.5]{images/ratio06.png}
+    \begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/ratio06.png}
+    \caption{Resultat pour 60\% des données dédiées à l'apprentissage}
+    \label{ratio06}
+    \end{figure}
 
  \subsubsection{Learning ratio = 0.8}
- 80 % des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
+\paragraph{}
+ 80 \% des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
  Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans le mêmes conditions.
  Dans ce context nous observons que l'algorithme KNN est environ 110 fois plus rapide de celui de Bayes.
- La précision reste stable, KNN est très légerement plus précis que Bayes pour les deux derniers jeux de test.
- \paragraph{}
- \includegraphics[width=7.5cm,scale=0.5]{images/ratio08.png}
+ La précision reste stable, KNN est très légerement plus précis que Bayes pour les deux derniers jeux de test (voir \figurename{ \ref{ratio08}}).
 
- \subsection{Analyse temporelle}
- \subsubsection{Bayes}
- \paragraph{}
- \includegraphics[width=7.5cm,scale=0.5]{images/durationBayes.png}\\
+    \begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/ratio08.png}
+    \caption{Resultat pour 80\% des données dédiées à l'apprentissage}
+    \label{ratio08}
+    \end{figure}
 
- \subsubsection{K\_NN}
- \paragraph{}
- \includegraphics[width=7.5cm,scale=0.5]{images/durationKNN.png}
 
-  \subsection{Analyse précision}
- \subsubsection{Bayes}
- \paragraph{}
- \includegraphics[width=7.5cm,scale=0.5]{images/precisionBayes.png}\\
-
- \subsubsection{K\_NN}
- \paragraph{}
- \includegraphics[width=7.5cm,scale=0.5]{images/precisionKNN.png}
-
+ 
 \section{Conclusion}
 
 
