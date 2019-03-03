@@ -108,62 +108,55 @@ da validation. Cette méthode de test s'appelle "testset validation" ou "holdout 
 \section{Résultats}
 \paragraph{}
 Nous rappelons que le "leanring ratio" est la proportion des données
-d'un fichier dédié à l\'apprentissage, la partie restante servant d\'échantillons
-da validation. Pour evaluer la performance d'un algorithme, nous disposons de deux métriques,le premier étant le temps nécéssaire au processus d'apprentissage et de validation, et la second est la précision avec laquelle les résultats sont fiables.
-Une série de 50 tests ont été effectués sur les fichiers test data2.csv, data3.csv et data12.csv pour chaque learning ratio suivant : 0.2 , 0.4, 0.6 et 0.8.
-Les résultats ci-dessous présentes les moyennes sur ces 50 tests.
+d'un fichier dédié à l'apprentissage, la partie restante servant d'échantillons
+da validation. Pour evaluer la performance d'un algorithme, nous disposons de deux métriques, le premier étant le temps nécéssaire au processus d'apprentissage et de validation, et la second est la précision avec laquelle les résultats sont fiables.
+Une série de 50 tests ont été effectués sur les fichiers tests data2.csv, data3.csv et data12.csv pour les learning ratio suivant : 0.2 , 0.4, 0.6 et 0.8.
+Les résultats ci-dessous présentent les moyennes sur ces 50 tests.
 \paragraph{}
 Pour reproduire les resultats observés il suffit de faire varier les paramètres dans le programme
 (cad le learning rate, nombre de test, affichage etc...). 
-Par defaut la fonction testmain est configuré pour tester 50 fois l'opération suivante: Calcul de la durée et la précision de l'algorithme KNN et Bayes pour un learning ratio fixé. En redirigeant la sortie standard vers un fichier ( ex: python3 main.py > resultat.csv) il suffit ensuite de copier/coller correctement les résultats dans le tableur resultat\_test.ods pour les résultat apparaissent. Les \figurename{ \ref{data2}}, \figurename{ \ref{data3_1}}, \figurename{ \ref{data3_2}} et \figurename{ \ref{data3_3}} ont été réalisé avec le logiciel GNUPlot avec les commandes suivantes:
-
+Par defaut la fonction testmain est configuré pour tester 50 fois l'opération suivante: calcul de la durée et de la précision des algorithmes KNN et Bayes pour un learning ratio fixé. En redirigeant la sortie standard vers un fichier ( ex: python3 main.py > resultat.csv) il suffit ensuite de copier/coller correctement les résultats dans le tableur resultat\_test.ods pour faire apparaitre les résultats. Les \figurename{ \ref{data2}}, \figurename{ \ref{data3_1}}, \figurename{ \ref{data3_2}} et \figurename{ \ref{data3_3}} ont été réalisé avec le logiciel GNUPlot avec les commandes suivantes:
 
 \subsection{Matrice de confusion}
 Afin d'analyser et de pouvoir comparer les résultats obtenus par les deux méthodes étudiées ici, on calcule pour chaque échantillon la matrice de confusion, permettant de déduire un taux d'erreur. Cette matrice est construite à l'aide d'une classe présentes dans la bibiliothèque Scikitlearn et en appliquant les calculs nécessaire pour calculer le taux d'erreur.
 
- 
 \subsection{Jeu de test}
  \paragraph{}
- Les jeux de test fournit montrent des classe distinct les uns des autre pour les fichiers data2.csv  (voir \figurename{ \ref{data2}}) et pour le fichier data3.csv (voir \figurename{ \ref{data3_1}}, \figurename{ \ref{data3_2}} , \figurename{ \ref{data3_3}})
-\paragraph{}
+ Les jeux de test fournit montrent des classe distinctes les unes des autre pour les fichiers data2.csv  (voir \figurename{ \ref{data2}}) et pour le fichier data3.csv (voir \figurename{ \ref{data3_1}}, \figurename{ \ref{data3_2}} , \figurename{ \ref{data3_3}})
 
-    \begin{figure}[ht]
-    \centering
+ \paragraph{}
+    \begin{figure}
+%     \centering
     \includegraphics[width=0.4\textwidth]{images/data2.png}
     \caption{Jeu de test data2.csv}
     \label{data2}
     \end{figure}
-
-
-    \begin{figure}[ht]
-    \centering
+    
+    \begin{figure}
+%     \centering
     \includegraphics[width=0.4\textwidth]{images/data3_1.png}
     \caption{Jeu de test data3.csv vue 1}
     \label{data3_1}
     \end{figure}
-
     
-    \begin{figure}[ht]
-    \centering
+    \begin{figure}
+%     \centering
     \includegraphics[width=0.4\textwidth]{images/data3_2.png}
     \caption{Jeu de test data3.csv vue 2}
     \label{data3_2}
     \end{figure}
     
-    
-    \begin{figure}[ht]
-    \centering
+    \begin{figure}
+%     \centering
     \includegraphics[width=0.4\textwidth]{images/data3_3.png}
     \caption{Jeu de test data3.csv vue 3}
     \label{data3_3}
     \end{figure}
-
-
- 
+    
 \subsection{Observations}
 
 \paragraph{}
-La \figurename{ \ref{durationBayes}} nous montre que plus la proportion des données liés à l'apprentissage est basse ( cad plus la proportion lié à la validation est haute) plus la temps d'execution global de l'algorithme est long (cad temps d'apprentissage + temps de validation). La restitution des données pour la validation demande plus de temps de calcul que pour l'apprentissage. Cette difference de durée est observé aussi avec la méthode KNN (VOIR \figurename{ \ref{durationKNN}}) mais en beacoups moins marqué. Le pic correspondant à un learning ratio de 0.8 sur le jeu de test data12.csv de la \figurename{ \ref{durationKNN}} reste inexpliqué.
+La \figurename{ \ref{durationBayes}} nous montre que plus la proportion des données liés à l'apprentissage est basse ( cad plus la proportion lié à la validation est haute) plus le temps d'execution global de l'algorithme est long (cad temps d'apprentissage + temps de validation). La restitution des données pour la validation demande plus de temps de calcul que pour l'apprentissage. Cette difference de durée est observé aussi avec la méthode KNN (VOIR \figurename{ \ref{durationKNN}}) mais de manière moins drastique. Le pic correspondant à un learning ratio de 0.8 sur le jeu de test data12.csv de la \figurename{ \ref{durationKNN}} reste inexpliqué.
 
 \paragraph{}
  
@@ -206,7 +199,7 @@ Les \figurename{ \ref{precisionBayes}} et \figurename{ \ref{precisionKNN}} montr
 \paragraph{}
  20 \% des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
  Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans le mêmes conditions.
- Dans ce context nous observons que l'algorithme KNN est environ 40 fois plus rapide de celui de Bayes.
+ Dans ce contexte nous observons que l'algorithme KNN est environ 40 fois plus rapide de celui de Bayes.
  La précision reste stable, KNN est très légerement moins précis que Bayes pour les deux premiers jeux de test (voir \figurename{ \ref{ratio02}}).
 
 
@@ -221,7 +214,7 @@ Les \figurename{ \ref{precisionBayes}} et \figurename{ \ref{precisionKNN}} montr
 \paragraph{}
  40 \% des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
  Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans le mêmes conditions.
- Dans ce context nous observons que l'algorithme KNN est environ 60 fois plus rapide de celui de Bayes.
+ Dans ce contexte nous observons que l'algorithme KNN est environ 60 fois plus rapide de celui de Bayes.
  La précision reste stable, KNN est très légerement plus précis que Bayes pour les deux derniers jeux de test (voir \figurename{ \ref{ratio04}}).
 
 
@@ -251,7 +244,7 @@ Les \figurename{ \ref{precisionBayes}} et \figurename{ \ref{precisionKNN}} montr
 \paragraph{}
  80 \% des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
  Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans le mêmes conditions.
- Dans ce context nous observons que l'algorithme KNN est environ 110 fois plus rapide de celui de Bayes.
+ Dans ce contexte nous observons que l'algorithme KNN est environ 110 fois plus rapide de celui de Bayes.
  La précision reste stable, KNN est très légerement plus précis que Bayes pour les deux derniers jeux de test (voir \figurename{ \ref{ratio08}}).
 
     \begin{figure}[ht]
@@ -260,10 +253,9 @@ Les \figurename{ \ref{precisionBayes}} et \figurename{ \ref{precisionKNN}} montr
     \caption{Resultat pour 80\% des données dédiées à l'apprentissage}
     \label{ratio08}
     \end{figure}
-
-
  
 \section{Conclusion}
-
+Les tests menés sur trois jeux de données différents, et sur une cinquantaine d'éxécution nous permet de mettre en evidence la corrélation entre la taille de la base d'apprentissage et le temps d'éxécution des algorithmes de classification supervisées étudiés est important. En effet on remarque, et ce de manière plus probante sur l'application de la méthode de Bayes, que le temps d'éxécution tant à diminuer pour des bases d'apprentissage fournies généreusement. Les tests menés montre également que pour un même ratio de partage des données, l'algorithme K-NN est beaucoup plus performant en temps d'éxécution que l'algorithme de Bayes avec gaussienne. Une explication possible à ce résultat et que les fonctions utilisé par K-NN appartenant à une bibliothèque propre à python, sont des fonctions optimisés au maximum. A cela peu s'ajouter un manque d'optimisation lors de la rédaction des fonctions pour la méthode par bayésienne, en exploitant pas suffisament les optimisations prévu dans le langage python par un manque de connaissance. On peut seulement déduire que dans le contexte fournit il est plus interessant d'opter pour la méthode des k plus proches voisins . Ce raisonnement est encouragé par les résultats obtenus lors des tests de précision qui se valent pour les deux méthodes.
+D'après nos résultats on peut en conclure que pour de grands jeux de données il est plus interessant d'opter pour la méthode des k-NN, et eventuellement favoriser la méthode par approche bayésienne pour des petits jeux de données. Cependant il s'agit de résultats expérimentaux. De plus il existe de nombreuses autres méthodes de classification supervisées qui n'ont pas été étudiés ici et qui auront probablement elles aussi leurs propre avantage en fonction du contexte, comme par exemple les resaux de neurones. 
 
 \end{document}
