@@ -71,15 +71,15 @@ Apprentissage, classification bayésienne, classification k-ppv.
 
 La classification bayésienne avec gaussienne et l'approche par la méthode des k-ppv sont des classifications supervisées dont l'objectif est de répartir les données par classe avec un taux d'erreur minimisé. Les tests sont menés sur un jeu de données contenant une centaine d'occurences de la prononciation d'une dizaine de voyelle aau format csv.\\
 A l'aide des travaux réalisés précédamment et en adaptant un peu le code nous avons pu implémenter le modèle de Bayes. L'implémentation pour une approche par les k-ppv, le sujet nous imposait l'utilisation de \textit{Scikitlearn}.\\
-Dans les tests menés les données fournies ont été repartie de telle sorte à avoir 80\% de données d'apprentissage et 20\% de données de tests. Dans les démarches d'apprentissage le choix d'un taux de données d'apprentissage élevé favorise l'obtention de meilleurs résultats, ici une meilleur prédiction de la répartition par classe.
+Dans les tests menés les données fournies ont été reparties de telle sorte à avoir 80\% de données d'apprentissage (le learning ratio) et 20\% de données de tests, ces proportion pourrons evoluer durant les tests. Dans les démarches d'apprentissage le choix d'un taux de données d'apprentissage élevé favorise l'obtention de meilleurs résultats, ici une meilleur prédiction de la répartition par classe.
 
 \section{Classification bayésienne avec Gaussienne}
-La classification bayéssienne avec Gaussienne est une minimisation de la vraisemblance qui vise à prédire la classe d'appartenance la plus probable d'une donnée. Néanmoins avec des données réelles il est difficile d'obtenir des résultats satisfaisants car les données ne sont pas simples. Ainsi pour améliorer le modèle on tient compte de la probabilité a priori en applicant la loi de Bayes.\\
-Dans les tps précedant, nous avions déjà implémenté en python l'algorithme de prédiction permettant de classer les données fournies. Ici nous somme reparti de ce code qui était basé sur une simplification de la vraisemblance en log-vraisemblance. C'est-à-dire que la vraisemblance qui est une expression exponentielle a été simplifié par l'application du logarithme népérien afin d'obtenir un calcul un peu plus optimisé. De plus toutes les constantes ne dépendant pas des données ont été supprimé, n'apportant pas une précision indispensable dans la reconnaissance des données.
+La classification bayéssienne avec Gaussienne est une minimisation de la vraisemblance qui vise à prédire la classe d'appartenance la plus probable d'une donnée. Néanmoins avec des données réelles il est difficile d'obtenir des résultats satisfaisants car les données ne sont pas simples. %Ainsi pour améliorer le modèle on tient compte de la probabilité a priori en applicant la loi de Bayes.\\ % (sylvain: je supp, les données à priori sont constantes pour tous les tests)
+Dans les tps précedant, nous avions déjà implémenté en python l'algorithme de prédiction permettant de classer les données fournies. Ici nous somme reparti de ce code qui était basé sur une simplification de la vraisemblance en log-vraisemblance. C'est-à-dire que la vraisemblance qui est une expression exponentielle a été simplifié par l'application du logarithme népérien afin d'obtenir un calcul un peu plus optimisé. De plus toutes les constantes ne dépendant pas des données ont été supprimées, n'apportant pas une précision indispensable dans la reconnaissance des données.
 
 \section{Classification k-NN}
 La méthode des K plus proches voisins (K-NN) a pour but de classifier des points cibles (classe méconnue) en fonction de leurs distances par rapport à des points constituant un échantillon d\'apprentissage (c\'est-à-dire dont la classe est connue a priori). Le calcul de la distance peut dépendre de l'expérience menée, Scikitlearn se base sur un calcul euclidien de la distance entre les données de l'échantillon, placées dans un repère après un traitement par une \textbf{A}nalyse en \textbf{C}omposantes \textbf{P}rincipales, et les centroïdes de la base d'apprentissage.
-Scikit learn est une bibliothèque libre pour python dont certaines fonctionnalités ont été utilisé pour implémenter la classification par k-NN. En effet toutes les fonctions appelé sur la variable n de la fonction k\_NN sont des fonctions appelés pour la classe KNeighborsClassifier, une classe de la bibliothèque permettant d'effectuer les traitements nécéssaire à une classification par plus proche voisin.
+Scikit learn est une bibliothèque libre pour python dont certaines fonctionnalités ont été utilisées pour implémenter la classification par k-NN. En effet toutes les fonctions appelé sur la variable n de la fonction k\_NN sont des fonctions appelés pour la classe KNeighborsClassifier, une classe de la bibliothèque permettant d'effectuer les traitements nécéssaire à une classification par plus proche voisin.
 
 \paragraph{}
 \begin{algorithm}
@@ -99,8 +99,8 @@ Scikit learn est une bibliothèque libre pour python dont certaines fonctionnalit
 
 \section{Evaluation par validation croisée}
 La validation croisée est une méthode d\'estimation de la fiabilité d\'un modèle
-fondé sur la technique d'échantillonage. Les essembles de données d'apprentissages
-sont les fichiers de test data2.csv, data3.csv et data12.csv sur lequel on peut
+fondé sur la technique d'échantillonage. Les enssembles de données d'apprentissages
+sont les fichiers de test data2.csv, data3.csv et data12.csv sur lequel nous pouvons
 entrainer le modèle. Nous appelons "leanring ratio" la proportion des données
 d'un fichier dédié à l\'apprentissage, la partie restante sert d\'échantillons
 da validation. Cette méthode de test s'appelle "testset validation" ou "holdout method".
@@ -108,21 +108,21 @@ da validation. Cette méthode de test s'appelle "testset validation" ou "holdout 
 \section{Résultats}
 \paragraph{}
 Nous rappelons que le "leanring ratio" est la proportion des données
-d'un fichier dédié à l'apprentissage, la partie restante servant d'échantillons
-da validation. Pour evaluer la performance d'un algorithme, nous disposons de deux métriques, le premier étant le temps nécéssaire au processus d'apprentissage et de validation, et la second est la précision avec laquelle les résultats sont fiables.
+d'un fichier dédiée à l'apprentissage, la partie restante servant d'échantillons
+pour la validation. Pour evaluer la performance d'un algorithme, nous disposons de deux métriques, le premier étant le temps nécéssaire au processus d'apprentissage et de validation, et la second est un taux représentant la précision avec laquelle une prédication est fiable.
 Une série de 50 tests ont été effectués sur les fichiers tests data2.csv, data3.csv et data12.csv pour les learning ratio suivant : 0.2 , 0.4, 0.6 et 0.8.
 Les résultats ci-dessous présentent les moyennes sur ces 50 tests.
 \paragraph{}
 Pour reproduire les resultats observés il suffit de faire varier les paramètres dans le programme
 (cad le learning rate, nombre de test, affichage etc...). 
-Par defaut la fonction testmain est configuré pour tester 50 fois l'opération suivante: calcul de la durée et de la précision des algorithmes KNN et Bayes pour un learning ratio fixé. En redirigeant la sortie standard vers un fichier ( ex: python3 main.py > resultat.csv) il suffit ensuite de copier/coller correctement les résultats dans le tableur resultat\_test.ods pour faire apparaitre les résultats. Les \figurename{ \ref{data2}}, \figurename{ \ref{data3_1}}, \figurename{ \ref{data3_2}} et \figurename{ \ref{data3_3}} ont été réalisé avec le logiciel GNUPlot avec les commandes suivantes:
+Par defaut la fonction testmain est configuré pour tester 50 fois l'opération suivante: calcul de la durée et de la précision des algorithmes KNN et Bayes pour un learning ratio fixé. En redirigeant la sortie standard vers un fichier ( ex: python3 main.py > resultat.csv) il suffit ensuite de copier/coller correctement les résultats dans le tableur resultat\_test.ods pour faire apparaitre les résultats. Les \figurename{ \ref{data2}}, \figurename{ \ref{data3_1}}, \figurename{ \ref{data3_2}} et \figurename{ \ref{data3_3}} ont été réalisées avec le logiciel GNUPlot avec les commandes suivantes:
 
 \subsection{Matrice de confusion}
-Afin d'analyser et de pouvoir comparer les résultats obtenus par les deux méthodes étudiées ici, on calcule pour chaque échantillon la matrice de confusion, permettant de déduire un taux d'erreur. Cette matrice est construite à l'aide d'une classe présentes dans la bibiliothèque Scikitlearn et en appliquant les calculs nécessaire pour calculer le taux d'erreur.
+Afin d'analyser et de pouvoir comparer les résultats obtenus par les deux méthodes étudiées ici, on calcule pour chaque échantillon la matrice de confusion, permettant de déduire un taux d'erreur. Cette matrice est construite à l'aide d'une classe présentes dans la bibiliothèque Scikitlearn en appliquant les calculs nécessaire pour calculer le taux d'erreur.
 
 \subsection{Jeu de test}
  \paragraph{}
- Les jeux de test fournit montrent des classe distinctes les unes des autre pour les fichiers data2.csv  (voir \figurename{ \ref{data2}}) et pour le fichier data3.csv (voir \figurename{ \ref{data3_1}}, \figurename{ \ref{data3_2}} , \figurename{ \ref{data3_3}})
+ Les jeux de test fournit montrent des classe distinctes les unes des autres pour les fichiers data2.csv  (voir \figurename{ \ref{data2}}) et pour le fichier data3.csv (voir \figurename{ \ref{data3_1}}, \figurename{ \ref{data3_2}} , \figurename{ \ref{data3_3}}); Ce qui laisse supposer un bon d'apprentissage par les méthodes utilisées
 
  \paragraph{}
     \begin{figure}
@@ -156,7 +156,7 @@ Afin d'analyser et de pouvoir comparer les résultats obtenus par les deux méthod
 \subsection{Observations}
 
 \paragraph{}
-La \figurename{ \ref{durationBayes}} nous montre que plus la proportion des données liés à l'apprentissage est basse ( cad plus la proportion lié à la validation est haute) plus le temps d'execution global de l'algorithme est long (cad temps d'apprentissage + temps de validation). La restitution des données pour la validation demande plus de temps de calcul que pour l'apprentissage. Cette difference de durée est observé aussi avec la méthode KNN (VOIR \figurename{ \ref{durationKNN}}) mais de manière moins drastique. Le pic correspondant à un learning ratio de 0.8 sur le jeu de test data12.csv de la \figurename{ \ref{durationKNN}} reste inexpliqué.
+La \figurename{ \ref{durationBayes}} nous montre que plus la proportion des données liées à l'apprentissage est basse ( cad plus la proportion lié à la validation est haute) plus le temps d'execution global de l'algorithme est long (cad temps d'apprentissage + temps de validation). La restitution des données pour la validation demande plus de temps de calcul que pour l'apprentissage. Cette difference de durée est observé aussi avec la méthode KNN (VOIR \figurename{ \ref{durationKNN}}) mais de manière moins drastique. Le pic correspondant à un learning ratio de 0.8 sur le jeu de test data12.csv de la \figurename{ \ref{durationKNN}} reste inexpliqué.
 
 \paragraph{}
  
@@ -176,7 +176,7 @@ La \figurename{ \ref{durationBayes}} nous montre que plus la proportion des donn
     \end{figure}
 
 \paragraph{}
-Les \figurename{ \ref{precisionBayes}} et \figurename{ \ref{precisionKNN}} montre que sur ces jeux de test les méthode KNN et Bayes sont équivalentes, en effet la différence de précision entre ces deux méthode ne sont pas significative. Des données chiffrés sont disponible dans les \figurename{ \ref{ratio02}}, \figurename{ \ref{ratio04}}, \figurename{ \ref{ratio06}} et \figurename{ \ref{ratio08}}. 
+Les \figurename{ \ref{precisionBayes}} et \figurename{ \ref{precisionKNN}} montre que sur ces jeux de test les méthodes KNN et Bayes sont équivalentes, en effet la différence de précision entre ces deux méthode ne sont pas significative. Des données chiffrés sont disponible dans les \figurename{ \ref{ratio02}}, \figurename{ \ref{ratio04}}, \figurename{ \ref{ratio06}} et \figurename{ \ref{ratio08}}. 
 
  \paragraph{}
      \begin{figure}[ht]
@@ -197,8 +197,8 @@ Les \figurename{ \ref{precisionBayes}} et \figurename{ \ref{precisionKNN}} montr
 
 \subsubsection{Learning ratio = 0.2}
 \paragraph{}
- 20 \% des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
- Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans le mêmes conditions.
+ 20 \% des données ont été utilisées pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
+ Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans les mêmes conditions.
  Dans ce contexte nous observons que l'algorithme KNN est environ 40 fois plus rapide de celui de Bayes.
  La précision reste stable, KNN est très légerement moins précis que Bayes pour les deux premiers jeux de test (voir \figurename{ \ref{ratio02}}).
 
@@ -212,8 +212,8 @@ Les \figurename{ \ref{precisionBayes}} et \figurename{ \ref{precisionKNN}} montr
 
  \subsubsection{Learning ratio = 0.4}
 \paragraph{}
- 40 \% des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
- Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans le mêmes conditions.
+ 40 \% des données ont été utilisées pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
+ Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans les mêmes conditions.
  Dans ce contexte nous observons que l'algorithme KNN est environ 60 fois plus rapide de celui de Bayes.
  La précision reste stable, KNN est très légerement plus précis que Bayes pour les deux derniers jeux de test (voir \figurename{ \ref{ratio04}}).
 
@@ -227,8 +227,8 @@ Les \figurename{ \ref{precisionBayes}} et \figurename{ \ref{precisionKNN}} montr
 
  \subsubsection{Learning ratio = 0.6}
 \paragraph{}
- 60 \% des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
- Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans le mêmes conditions.
+ 60 \% des données ont été utilisées pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
+ Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans les mêmes conditions.
  Dans ce context nous observons que l'algorithme KNN est environ 80 fois plus rapide de celui de Bayes.
  La précision reste stable, KNN est très légerement plus précis que Bayes pour les deux derniers jeux de test (voir \figurename{ \ref{ratio06}}).
 
@@ -242,8 +242,8 @@ Les \figurename{ \ref{precisionBayes}} et \figurename{ \ref{precisionKNN}} montr
 
  \subsubsection{Learning ratio = 0.8}
 \paragraph{}
- 80 \% des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
- Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans le mêmes conditions.
+ 80 \% des données ont été utilisées pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
+ Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans les mêmes conditions.
  Dans ce contexte nous observons que l'algorithme KNN est environ 110 fois plus rapide de celui de Bayes.
  La précision reste stable, KNN est très légerement plus précis que Bayes pour les deux derniers jeux de test (voir \figurename{ \ref{ratio08}}).
 
@@ -255,7 +255,7 @@ Les \figurename{ \ref{precisionBayes}} et \figurename{ \ref{precisionKNN}} montr
     \end{figure}
  
 \section{Conclusion}
-Les tests menés sur trois jeux de données différents, et sur une cinquantaine d'éxécution nous permet de mettre en evidence la corrélation entre la taille de la base d'apprentissage et le temps d'éxécution des algorithmes de classification supervisées étudiés est important. En effet on remarque, et ce de manière plus probante sur l'application de la méthode de Bayes, que le temps d'éxécution tant à diminuer pour des bases d'apprentissage fournies généreusement. Les tests menés montre également que pour un même ratio de partage des données, l'algorithme K-NN est beaucoup plus performant en temps d'éxécution que l'algorithme de Bayes avec gaussienne. Une explication possible à ce résultat et que les fonctions utilisé par K-NN appartenant à une bibliothèque propre à python, sont des fonctions optimisés au maximum. A cela peu s'ajouter un manque d'optimisation lors de la rédaction des fonctions pour la méthode par bayésienne, en exploitant pas suffisament les optimisations prévu dans le langage python par un manque de connaissance. On peut seulement déduire que dans le contexte fournit il est plus interessant d'opter pour la méthode des k plus proches voisins . Ce raisonnement est encouragé par les résultats obtenus lors des tests de précision qui se valent pour les deux méthodes.
-D'après nos résultats on peut en conclure que pour de grands jeux de données il est plus interessant d'opter pour la méthode des k-NN, et eventuellement favoriser la méthode par approche bayésienne pour des petits jeux de données. Cependant il s'agit de résultats expérimentaux. De plus il existe de nombreuses autres méthodes de classification supervisées qui n'ont pas été étudiés ici et qui auront probablement elles aussi leurs propre avantage en fonction du contexte, comme par exemple les resaux de neurones. 
+Les tests menés sur trois jeux de données différents, et sur une cinquantaine d'éxécution nous permet de mettre en evidence la corrélation entre la taille de la base d'apprentissage et le temps d'éxécution des algorithmes de classification supervisées étudiés est important. En effet on remarque, et ce de manière plus probante sur l'application de la méthode de Bayes, que le temps d'éxécution tant à diminuer pour des bases d'apprentissage fournies généreusement. Les tests menés montre également que pour un même ratio de partage des données, l'algorithme K-NN est beaucoup plus performant en temps d'éxécution que l'algorithme de Bayes avec gaussienne. Une explication possible à ce résultat et que les fonctions utilisées par K-NN appartenant à une bibliothèque propre à python, sont des fonctions optimisés au maximum. A cela peu s'ajouter un manque d'optimisation lors de la rédaction des fonctions pour la méthode par bayésienne, en exploitant pas suffisament les optimisations prévu dans le langage python par un manque de connaissance. On peut seulement déduire que dans le contexte fournit il est plus interessant d'opter pour la méthode des k plus proches voisins . Ce raisonnement est encouragé par les résultats obtenus lors des tests de précision qui se valent pour les deux méthodes.
+D'après nos résultats on peut en conclure que pour de grands jeux de données il est plus interessant d'opter pour la méthode des k-NN, et eventuellement favoriser la méthode par approche bayésienne pour des petits jeux de données. Cependant il s'agit de résultats expérimentaux. De plus il existe de nombreuses autres méthodes de classification supervisées qui n'ont pas été étudiés ici et qui auront probablement elles aussi leurs propre avantage en fonction du contexte.
 
 \end{document}
