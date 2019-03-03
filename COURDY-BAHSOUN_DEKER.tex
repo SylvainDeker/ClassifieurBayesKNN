@@ -71,7 +71,7 @@ Apprentissage, classification bayésienne, classification k-ppv.
 
 La classification bayésienne avec gaussienne et l'approche par la méthode des k-ppv sont des classifications supervisées dont l'objectif est de répartir les données par classe avec un taux d'erreur minimisé. Les tests sont menés sur un jeu de données contenant une centaine d'occurences de la prononciation d'une dizaine de voyelle aau format csv.\\
 A l'aide des travaux réalisés précédamment et en adaptant un peu le code nous avons pu implémenter le modèle de Bayes. L'implémentation pour une approche par les k-ppv, le sujet nous imposait l'utilisation de \textit{Scikitlearn}.\\
-Dans les tests menés les données fournies ont été repartie de telle sorte à avoir 80\% de données d'apprentissage et 20\% de données de tests. Dans les démarches d'apprentissage le choix d'un taux de données d'apprentissage élevé favorise l'obtention de meilleurs résultats, ici une meilleur prédiction de la répartition par classe. 
+Dans les tests menés les données fournies ont été repartie de telle sorte à avoir 80\% de données d'apprentissage et 20\% de données de tests. Dans les démarches d'apprentissage le choix d'un taux de données d'apprentissage élevé favorise l'obtention de meilleurs résultats, ici une meilleur prédiction de la répartition par classe.
 
 \section{Classification bayésienne avec Gaussienne}
 La classification bayéssienne avec Gaussienne est une minimisation de la vraisemblance qui vise à prédire la classe d'appartenance la plus probable d'une donnée. Néanmoins avec des données réelles il est difficile d'obtenir des résultats satisfaisants car les données ne sont pas simples. Ainsi pour améliorer le modèle on tient compte de la probabilité a priori en applicant la loi de Bayes.\\
@@ -86,10 +86,10 @@ Scikit learn est une bibliothèque libre pour python dont certaines fonctionnalit
  \caption{k\_NN}
  \begin{algorithmic}
   \REQUIRE  train\_data, train\_labels, test\_data, test\_labels
-  \ENSURE  m : matrice de confusion \\ p : precision 
+  \ENSURE  m : matrice de confusion \\ p : precision
   \STATE  n = neighbors.KNeighborsClassifier(n\_neighbours,weights = 'distance')
   \STATE n.fit(train\_data,train\_labels) \%apprentissage
-  \STATE y = n.predict(test\_data) 
+  \STATE y = n.predict(test\_data)
   mconf = matriceConf(test\_labels,y) \%calcul matrice de confusion, fonction rédigé
   \RETURN (mconf[0], mconf[1])
  \end{algorithmic}
@@ -107,26 +107,59 @@ da validation. Cette méthode de test s'appelle "testset validation" ou "holdout 
 
 \section{Résultats}
 
+Nous rappelons que le "leanring ratio" est la proportion des données
+d'un fichier dédié à l\'apprentissage, la partie restante servant d\'échantillons
+da validation. Pour evaluer la performance d'un algorithme, nous disposons de deux métriques,le premier étant le temps nécéssaire au processus d'apprentissage et de validation, et la second est la précision avec laquelle les résultats sont fiables.
+Une série de 50 tests ont été effectués sur les fichiers test data2.csv, data3.csv et data12.csv pour chaque learning ratio suivant : 0.2 , 0.4, 0.6 et 0.8.
+Les résultats ci-dessous présentes les moyennes sur ces 50 tests.
 \subsection{Matrice de confusion}
 Afin d'analyser et de pouvoir comparer les résultats obtenus par les deux méthodes étudiées ici, on calcule pour chaque échantillon la matrice de confusion, permettant de déduire un taux d'erreur. Cette matrice est construite à l'aide d'une classe présentes dans la bibiliothèque Scikitlearn et en appliquant les calculs nécessaire pour calculer le taux d'erreur.
-
-\subsection{Learning ratio = 0.2}
+\subsection{Jeu de test}
+\subsubsection{jeux de test data2.csv}
+\paragraph{}
+ \includegraphics[width=7.5cm,scale=0.5]{images/data2.png}
+ \paragraph{}
+ \subsubsection{jeux de test data3.csv}
+ \includegraphics[width=7.5cm,scale=0.5]{images/data3_1.png}
+  \paragraph{}
+ \includegraphics[width=7.5cm,scale=0.5]{images/data3_2.png}
+  \paragraph{}
+ \includegraphics[width=7.5cm,scale=0.5]{images/data3_3.png}
+ \subsubsection{jeux de test data12.csv}
  
+\subsection{Observations}
+\subsubsection{Learning ratio = 0.2}
+ 20 % des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
+ Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans le mêmes conditions.
+ Dans ce context nous observons que l'algorithme KNN est environ 40 fois plus rapide de celui de Bayes.
+ La précision reste stable, KNN est très légerement moins précis que Bayes pour les deux premiers jeux de test.
  \paragraph{}
  \includegraphics[width=7.5cm,scale=0.5]{images/ratio02.png}
 
- \subsection{Learning ratio = 0.4}
- 
+ \subsubsection{Learning ratio = 0.4}
+ 40 % des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
+ Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans le mêmes conditions.
+ Dans ce context nous observons que l'algorithme KNN est environ 60 fois plus rapide de celui de Bayes.
+ La précision reste stable, KNN est très légerement plus précis que Bayes pour les deux derniers jeux de test.
+
  \paragraph{}
  \includegraphics[width=7.5cm,scale=0.5]{images/ratio04.png}
- 
- \subsection{Learning ratio = 0.6}
- 
+
+ \subsubsection{Learning ratio = 0.6}
+ 60 % des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
+ Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans le mêmes conditions.
+ Dans ce context nous observons que l'algorithme KNN est environ 80 fois plus rapide de celui de Bayes.
+ La précision reste stable, KNN est très légerement plus précis que Bayes pour les deux derniers jeux de test.
+
+
  \paragraph{}
  \includegraphics[width=7.5cm,scale=0.5]{images/ratio06.png}
- 
- \subsection{Learning ratio = 0.8}
- 
+
+ \subsubsection{Learning ratio = 0.8}
+ 80 % des données ont été utilisé pour l'apprentissage de facons aléatoire pour chaque jeu de test (fichier.csv).
+ Les données pour chaque jeu de test est une moyenne de 50 tests réalisés dans le mêmes conditions.
+ Dans ce context nous observons que l'algorithme KNN est environ 110 fois plus rapide de celui de Bayes.
+ La précision reste stable, KNN est très légerement plus précis que Bayes pour les deux derniers jeux de test.
  \paragraph{}
  \includegraphics[width=7.5cm,scale=0.5]{images/ratio08.png}
 
@@ -134,7 +167,7 @@ Afin d'analyser et de pouvoir comparer les résultats obtenus par les deux méthod
  \subsubsection{Bayes}
  \paragraph{}
  \includegraphics[width=7.5cm,scale=0.5]{images/durationBayes.png}\\
- 
+
  \subsubsection{K\_NN}
  \paragraph{}
  \includegraphics[width=7.5cm,scale=0.5]{images/durationKNN.png}
@@ -143,7 +176,7 @@ Afin d'analyser et de pouvoir comparer les résultats obtenus par les deux méthod
  \subsubsection{Bayes}
  \paragraph{}
  \includegraphics[width=7.5cm,scale=0.5]{images/precisionBayes.png}\\
- 
+
  \subsubsection{K\_NN}
  \paragraph{}
  \includegraphics[width=7.5cm,scale=0.5]{images/precisionKNN.png}
